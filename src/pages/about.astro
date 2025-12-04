@@ -1,0 +1,16 @@
+---
+// import { Button } from '@/components/ui/button'
+import Button from '../components/Button.astro'
+import MainLayout from '../layouts/main.astro'
+---
+
+<MainLayout title='About | Blog'>
+  <div class='grid place-items-center h-screen content-center min-h-screen'>
+    <h1 class='text-3xl pb-3'>About</h1>
+    <Button
+      client:load
+      variant='outline'
+      >Click Me (I am a react island)</Button
+    >
+  </div>
+</MainLayout>
