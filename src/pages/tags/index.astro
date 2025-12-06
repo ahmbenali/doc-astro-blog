@@ -1,0 +1,44 @@
+---
+import MainLayout from '../../layouts/main-layout.astro'
+import type { Post } from '../blog.astro'
+
+const allPosts = Object.values(
+  import.meta.glob('../posts/*.md', { eager: true })
+) as Post[]
+
+const tags = [...new Set(allPosts.flatMap(post => post.frontmatter.tags))]
+
+const pageTitle = 'Tags index'
+---
+
+<MainLayout pageTitle={pageTitle}>
+  <ul>
+    {
+      tags.map(tag => (
+        <p class='tag'>
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
+  </ul>
+</MainLayout>
+
+<style>
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
+</style>

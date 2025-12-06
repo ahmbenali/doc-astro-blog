@@ -1,0 +1,21 @@
+---
+interface Props {
+  post: {
+    url: string
+    frontmatter: {
+      title: string
+    }
+  }
+}
+
+const {
+  post: {
+    url,
+    frontmatter: { title },
+  },
+} = Astro.props as Props
+---
+
+<li>
+  <a href={url}>{title}</a>
+</li>

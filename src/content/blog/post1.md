@@ -1,8 +1,14 @@
 ---
+layout: ../../layouts/md-post-layout.astro
+
 title: 'Astro, Tailwind, and Shadcn'
-description: 'Building the ultimate tech stack.'
 pubDate: 2025-12-04
-layout: ../../layouts/main.astro # A layout for posts
+description: 'Building the ultimate tech stack.'
+author: 'Astro Learner'
+image:
+  url: 'https://docs.astro.build/assets/rose.webp'
+  alt: 'The Astro logo on a dark background with a pink glow.'
+tags: ['astro', 'blogging', 'successes']
 ---
 
 # My First Blog Post

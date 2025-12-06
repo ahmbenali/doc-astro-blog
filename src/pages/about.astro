@@ -1,16 +1,97 @@
 ---
-// import { Button } from '@/components/ui/button'
-import Button from '../components/Button.astro'
-import MainLayout from '../layouts/main.astro'
+import '../styles/global.css'
+import Footer from '../components/footer.astro'
+import Navbar from '../components/navbar.astro'
+
+const pageTitle = 'About Me'
+
+const identity = {
+  firstName: 'Sarah',
+  country: 'Germany',
+  occupation: 'Technical Writer',
+  hobbies: ['photography', 'birdwatching', 'baseball'],
+}
+
+const {
+  firstName,
+  country,
+  occupation,
+  hobbies: [hoby1, hoby2],
+} = identity
+
+const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro', 'Writing Docs']
+
+const happy = true
+const finished = true
+const goal = 3
+
+const skillColor = 'teal'
+const headingColor = 'crimson'
+const fontWeight = 'bold'
+const textCase = 'uppercase'
+const listStyle = 'square'
 ---
 
-<MainLayout title='About | Blog'>
-  <div class='grid place-items-center h-screen content-center min-h-screen'>
-    <h1 class='text-3xl pb-3'>About</h1>
-    <Button
-      client:load
-      variant='outline'
-      >Click Me (I am a react island)</Button
-    >
-  </div>
-</MainLayout>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta
+      name='viewport'
+      content='width=device-width'
+    />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Navbar />
+    <h1>{pageTitle}</h1>
+
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial!</p>}
+
+    {
+      goal === 3 ? (
+        <p>My goal is to finish in 3 days.</p>
+      ) : (
+        <p>My goal is not 3 days.</p>
+      )
+    }
+
+    <p>Here are a few facts about me:</p>
+    <ul>
+      <li>My name is {firstName}.</li>
+      <li>
+        I live in {country} and I work as a {occupation}.
+      </li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two of my hobbies are: {hoby1} and {hoby2}
+          </li>
+        )
+      }
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+      {skills.map(skill => <li class='skill'>{skill}</li>)}
+    </ul>
+    <Footer />
+    <script>
+      import '../scripts/menu.ts'
+    </script>
+  </body>
+</html>
+
+<style define:vars={{ skillColor, fontWeight, textCase, headingColor, listStyle }}>
+  h1 {
+    color: var(--headingColor);
+    font-size: 4rem;
+  }
+
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    list-style: var(--listStyle);
+    text-transform: var(--textCase);
+  }
+</style>
