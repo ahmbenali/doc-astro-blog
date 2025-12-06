@@ -1,6 +1,7 @@
 ---
-import { Navbar, PostCard, Footer } from '@/components'
+import {PostCard} from '@/components'
 
+import MainLayout from '../layouts/main-layout.astro'
 import '../styles/global.css'
 
 const allPosts = Object.values(
@@ -11,30 +12,14 @@ const allPosts = Object.values(
 const pageTitle = 'My Astro Learning Blog'
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <meta
-      name='viewport'
-      content='width=device-width'
-    />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <Navbar />
+<MainLayout>
+  <h1>{pageTitle}</h1>
+  <p>This is where I will post about my journey learning Astro.</p>
+  <ul>
+    {allPosts.map(post => <PostCard {post} />)}
+  </ul>
 
-    <h1>{pageTitle}</h1>
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-
-    <ul>
-      {allPosts.map(post => <PostCard {post} />)}
-    </ul>
-
-    <Footer />
-
-    <script>
-      import '../scripts/menu.ts'
-    </script>
-  </body>
-</html>
+  <script>
+    import '../scripts/menu.ts'
+  </script>
+</MainLayout>

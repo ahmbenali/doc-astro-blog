@@ -1,6 +1,5 @@
 ---
 import MainLayout from '../../layouts/main-layout.astro'
-import type { Post } from '../blog.astro'
 
 const allPosts = Object.values(
   import.meta.glob('../posts/*.md', { eager: true })

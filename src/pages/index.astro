@@ -1,12 +1,15 @@
 ---
-import '../styles/global.css'
-import Footer from '../components/footer.astro'
-import Navbar from '../components/navbar.astro'
+import Greeting from '@/components/welcome'
 import MainLayout from '../layouts/main-layout.astro'
+import '../styles/global.css'
 
 const pageTitle = 'Home'
 ---
 
 <MainLayout pageTitle={pageTitle}>
-  <p>My awesome Astro Site</p>
+  <h2>My awesome Astro Site</h2>
+  <Greeting
+    client:load
+    msgs={['Hi', 'Hello', 'Howdy', 'Hey there']}
+  />
 </MainLayout>

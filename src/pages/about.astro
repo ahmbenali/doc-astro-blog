@@ -1,16 +1,9 @@
 ---
+import MainLayout from '../layouts/main-layout.astro'
+import { identity, skills } from '../lib/constants'
 import '../styles/global.css'
-import Footer from '../components/footer.astro'
-import Navbar from '../components/navbar.astro'
 
 const pageTitle = 'About Me'
-
-const identity = {
-  firstName: 'Sarah',
-  country: 'Germany',
-  occupation: 'Technical Writer',
-  hobbies: ['photography', 'birdwatching', 'baseball'],
-}
 
 const {
   firstName,
@@ -18,8 +11,6 @@ const {
   occupation,
   hobbies: [hoby1, hoby2],
 } = identity
-
-const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro', 'Writing Docs']
 
 const happy = true
 const finished = true
@@ -32,57 +23,53 @@ const textCase = 'uppercase'
 const listStyle = 'square'
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <meta
-      name='viewport'
-      content='width=device-width'
-    />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <Navbar />
-    <h1>{pageTitle}</h1>
+<MainLayout>
+  <h1>{pageTitle}</h1>
 
-    {happy && <p>I am happy to be learning Astro!</p>}
+  {happy && <p>I am happy to be learning Astro!</p>}
 
-    {finished && <p>I finished this tutorial!</p>}
+  {finished && <p>I finished this tutorial!</p>}
 
+  {
+    goal === 3 ? (
+      <p>My goal is to finish in 3 days.</p>
+    ) : (
+      <p>My goal is not 3 days.</p>
+    )
+  }
+
+  <p>Here are a few facts about me:</p>
+  <ul>
+    <li>My name is {firstName}.</li>
+    <li>
+      I live in {country} and I work as a {occupation}.
+    </li>
     {
-      goal === 3 ? (
-        <p>My goal is to finish in 3 days.</p>
-      ) : (
-        <p>My goal is not 3 days.</p>
+      identity.hobbies.length >= 2 && (
+        <li>
+          Two of my hobbies are: {hoby1} and {hoby2}
+        </li>
       )
     }
+  </ul>
+  <p>My skills are:</p>
+  <ul>
+    {skills.map(skill => <li class='skill'>{skill}</li>)}
+  </ul>
+  <script>
+    import '../scripts/menu.ts'
+  </script>
+</MainLayout>
 
-    <p>Here are a few facts about me:</p>
-    <ul>
-      <li>My name is {firstName}.</li>
-      <li>
-        I live in {country} and I work as a {occupation}.
-      </li>
-      {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Two of my hobbies are: {hoby1} and {hoby2}
-          </li>
-        )
-      }
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-      {skills.map(skill => <li class='skill'>{skill}</li>)}
-    </ul>
-    <Footer />
-    <script>
-      import '../scripts/menu.ts'
-    </script>
-  </body>
-</html>
-
-<style define:vars={{ skillColor, fontWeight, textCase, headingColor, listStyle }}>
+<style
+  define:vars={{
+    skillColor,
+    fontWeight,
+    textCase,
+    headingColor,
+    listStyle,
+  }}
+>
   h1 {
     color: var(--headingColor);
     font-size: 4rem;
